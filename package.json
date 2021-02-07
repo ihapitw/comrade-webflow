@@ -1,0 +1,45 @@
+{
+  "name": "comrade-webflow",
+  "version": "1.0.0",
+  "description": "Webflow support library",
+  "main": "dist/comrade-forms.js",
+  "module": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
+  },
+  "files": [
+    "src/styles/*",
+    "src/modules/*",
+    "src/index.js",
+    "dist/comrade-webflow.js"
+  ],
+  "keywords": [],
+  "author": "Vadim Denisenko, http://github.com/ihapitw",
+  "repository": "github:ihapitw/comrade-webflow",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
+    "@babel/preset-env": "^7.9.6",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "html-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "prettier": "^2.0.2",
+    "sass-loader": "^8.0.2",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-notifier": "^1.8.0"
+  }
+}
