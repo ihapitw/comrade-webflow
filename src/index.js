@@ -52,9 +52,7 @@ export class ComradeWebflow {
         library.load().then(callback)
       }
     } else {
-      console.error(
-        `CWF: library ${alias} not registered, callback will be executed immediately`
-      )
+      console.error(`CWF: library ${alias} not registered`)
     }
   }
 
