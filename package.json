@@ -1,8 +1,8 @@
 {
   "name": "comrade-webflow",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Webflow support library",
-  "main": "dist/comrade-forms.js",
+  "main": "dist/comrade-webflow.js",
   "module": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
