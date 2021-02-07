@@ -15,7 +15,7 @@ export class CWFLibrary {
     }
   }
 
-  async load() {
+  load() {
     if (this.element) {
       if (this.loaded) {
         return Promise.resolve()

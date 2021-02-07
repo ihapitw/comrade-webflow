@@ -1,5 +1,3 @@
-import 'regenerator-runtime/runtime'
-
 let instance = null
 
 import { CWFLibrary } from './modules/library'

@@ -1,4 +1,4 @@
-export async function jqueryWatcher() {
+export function jqueryWatcher() {
   return new Promise((resolve) => {
     if (window.$ || window.jQuery) {
       resolve()

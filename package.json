@@ -1,6 +1,6 @@
 {
   "name": "comrade-webflow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Webflow support library",
   "main": "dist/comrade-forms.js",
   "module": "index.js",
