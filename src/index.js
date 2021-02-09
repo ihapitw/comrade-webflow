@@ -1,7 +1,7 @@
 let instance = null
 
 import { CWFLibrary } from './modules/library'
-import { jqueryWatcher } from './utils/jquery-watcher'
+import { jqueryWatcher } from './utils/jquery-ready-watcher'
 
 export class ComradeWebflow {
   constructor() {

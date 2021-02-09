@@ -1,4 +1,4 @@
-import { createScript, createStyle } from '../utils/create'
+import { createScript, createStyle } from '../utils/create-content'
 export class CWFLibrary {
   constructor({ type, url, alias, trigger }) {
     this.alias = alias
@@ -14,26 +14,21 @@ export class CWFLibrary {
       console.log(`CWF: ${alias} style not load, ${trigger} not found on page`)
     }
   }
-
+  createElement() {
+    if (this.type === 'script') {
+      this.element = createScript(this.url)
+    } else if (this.type === 'style') {
+      this.element = createStyle(this.url)
+    }
+    this.element.id = `cwf-${this.type}-${this.alias}`
+  }
   load() {
-    if (this.element) {
-      if (this.loaded) {
-        return Promise.resolve()
-      } else {
-        return new Promise((resolve) => {
-          this.element.addEventListener('load', () => {
-            resolve()
-          })
-        })
-      }
+    if (this.element && this.loaded) {
+      return Promise.resolve()
     } else {
-      if (this.type === 'script') {
-        this.element = createScript(this.url)
-      } else if (this.type === 'style') {
-        this.element = createStyle(this.url)
+      if (!this.element) {
+        this.createElement()
       }
-      this.element.id = `cwf-${this.type}-${this.alias}`
-
       return new Promise((resolve) => {
         this.element.addEventListener('load', () => {
           this.loaded = true
