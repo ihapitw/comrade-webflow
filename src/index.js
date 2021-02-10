@@ -1,6 +1,7 @@
 let instance = null
 
 import { CWFLibrary } from './modules/library'
+import { CWFBreadCrumbs } from './schemas/breadcrumbs'
 import { jqueryWatcher } from './utils/jquery-ready-watcher'
 
 export class ComradeWebflow {
@@ -58,5 +59,12 @@ export class ComradeWebflow {
 
   $ready(callback) {
     jqueryWatcher().then(callback)
+  }
+
+  schema({ type, selector }) {
+    if (type === 'breadcrumbs') {
+      this.breadcrumbs = new CWFBreadCrumbs(selector)
+      console.log(this.breadcrumbs)
+    }
   }
 }

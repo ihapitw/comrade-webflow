@@ -64,3 +64,49 @@ CWF.$ready(function () {
 ```
 
 > code will be executed only after jquery is loaded, can be used inside the symbol in the `embed code`
+
+# Schema
+
+### HTML
+
+```html
+<a class="breadcrumb-item" href="/">Home</a>
+<a class="breadcrumb-item" href="/blog">Blog</a>
+<span class="breadcrumb-item">Blog inner</span>
+```
+
+### Java Script
+
+```js
+CWF.schema({ type: 'breadcrumbs', selector: '.breadcrumb-item' })
+```
+
+### Result in `<head>`
+
+```html
+<script type="application/ld+json" id="BreadcrumbList">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 0,
+        "name": "Home",
+        "item": "http://webflow.site/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "http://webflow.site/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog inner"
+      }
+    ]
+  }
+</script>
+```

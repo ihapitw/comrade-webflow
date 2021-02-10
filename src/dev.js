@@ -20,3 +20,5 @@ CWF.use('comrade-forms', function () {
 CWF.$ready(function () {
   console.log('ready work')
 })
+
+CWF.schema({ type: 'breadcrumbs', selector: '.breadcrumb-item' })
