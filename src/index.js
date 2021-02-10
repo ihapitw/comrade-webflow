@@ -1,7 +1,8 @@
 let instance = null
 
 import { CWFLibrary } from './modules/library'
-import { CWFBreadCrumbs } from './schemas/breadcrumbs'
+import { CWFSchemaBreadCrumbs } from './schemas/breadcrumbs'
+import { CWFSchemaFAQ } from './schemas/faq'
 import { jqueryWatcher } from './utils/jquery-ready-watcher'
 
 export class ComradeWebflow {
@@ -9,7 +10,7 @@ export class ComradeWebflow {
     if (instance) {
       return instance
     }
-
+    this.schemas = {}
     this.libraries = {
       script: {},
       style: {}
@@ -61,10 +62,25 @@ export class ComradeWebflow {
     jqueryWatcher().then(callback)
   }
 
-  schema({ type, selector }) {
+  schema({
+    type,
+    selector,
+    faq = {
+      questionSelector: '',
+      answerSelector: ''
+    }
+  }) {
     if (type === 'breadcrumbs') {
-      this.breadcrumbs = new CWFBreadCrumbs(selector)
-      console.log(this.breadcrumbs)
+      this.schemas.breadcrumbs = new CWFSchemaBreadCrumbs(selector)
+      console.log(this.schemas.breadcrumbs)
+    }
+    if (type === 'faq') {
+      this.schemas.faq = new CWFSchemaFAQ(
+        selector,
+        faq.questionSelector,
+        faq.answerSelector
+      )
+      console.log(this.schemas.faq)
     }
   }
 }

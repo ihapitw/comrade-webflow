@@ -22,3 +22,11 @@ CWF.$ready(function () {
 })
 
 CWF.schema({ type: 'breadcrumbs', selector: '.breadcrumb-item' })
+CWF.schema({
+  type: 'faq',
+  selector: '.faq-item',
+  faq: {
+    questionSelector: '.faq-question',
+    answerSelector: '.faq-answer'
+  }
+})

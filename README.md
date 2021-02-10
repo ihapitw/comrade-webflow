@@ -67,21 +67,25 @@ CWF.$ready(function () {
 
 # Schema
 
-### HTML
+## Breadcrumbs
+
+#### HTML
 
 ```html
-<a class="breadcrumb-item" href="/">Home</a>
-<a class="breadcrumb-item" href="/blog">Blog</a>
-<span class="breadcrumb-item">Blog inner</span>
+<section>
+  <a class="breadcrumb-item" href="/">Home</a>
+  <a class="breadcrumb-item" href="/blog">Blog</a>
+  <span class="breadcrumb-item">Blog inner</span>
+</section>
 ```
 
-### Java Script
+#### JS
 
 ```js
 CWF.schema({ type: 'breadcrumbs', selector: '.breadcrumb-item' })
 ```
 
-### Result in `<head>`
+#### Result in `<head>`
 
 ```html
 <script type="application/ld+json" id="BreadcrumbList">
@@ -105,6 +109,59 @@ CWF.schema({ type: 'breadcrumbs', selector: '.breadcrumb-item' })
         "@type": "ListItem",
         "position": 2,
         "name": "Blog inner"
+      }
+    ]
+  }
+</script>
+```
+
+## FAQ
+
+#### HTML
+
+```html
+<section>
+  <div class="faq-item">
+    <div class="faq-question">Question 1</div>
+    <div class="faq-answer">Answer 1</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">Question 2</div>
+    <div class="faq-answer">Answer 2</div>
+  </div>
+</section>
+```
+
+#### JS
+
+```js
+CWF.schema({
+  type: 'faq',
+  selector: '.faq-item',
+  faq: {
+    questionSelector: '.faq-question',
+    answerSelector: '.faq-answer'
+  }
+})
+```
+
+#### Result in `<head>`
+
+```html
+<script type="application/ld+json" id="FAQPage">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Question 1",
+        "acceptedAnswer": { "@type": "Answer", "text": "Answer 1" }
+      },
+      {
+        "@type": "Question",
+        "name": "Question 2",
+        "acceptedAnswer": { "@type": "Answer", "text": "Answer 2" }
       }
     ]
   }

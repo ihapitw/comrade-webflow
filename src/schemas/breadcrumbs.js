@@ -1,6 +1,6 @@
 import { CWFSchema } from '../modules/schema'
 
-export class CWFBreadCrumbs extends CWFSchema {
+export class CWFSchemaBreadCrumbs extends CWFSchema {
   constructor(itemSelector) {
     super(itemSelector)
 
@@ -9,21 +9,16 @@ export class CWFBreadCrumbs extends CWFSchema {
     this.setMeta()
     this.setElements()
   }
-
-  setElements() {
-    this.items.forEach((element, index) => {
-      const atom = {
-        '@type': 'ListItem',
-        position: index,
-        name: element.textContent,
-        item: element.href || false
-      }
-      if (atom.item === false) {
-        delete atom.item
-      }
-      this.template[this.itemsField].push(atom)
-    })
-
-    this.print()
+  renderAtom(element, index) {
+    const atom = {
+      '@type': 'ListItem',
+      position: index,
+      name: element.textContent,
+      item: element.href || false
+    }
+    if (atom.item === false) {
+      delete atom.item
+    }
+    return atom
   }
 }

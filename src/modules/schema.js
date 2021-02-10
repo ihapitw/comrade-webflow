@@ -10,15 +10,22 @@ export class CWFSchema {
       '@context': 'https://schema.org',
       '@type': ''
     }
-    this.elementTemplate = {}
   }
 
   setMeta() {
     this.template['@type'] = this.type
     this.template[this.itemsField] = []
   }
-
-  setElements() {}
+  renderAtom() {
+    return 'empty'
+  }
+  setElements() {
+    this.template[this.itemsField] = []
+    this.items.forEach((element, index) => {
+      this.template[this.itemsField].push(this.renderAtom(element, index))
+    })
+    this.print()
+  }
 
   print() {
     createSchema(this.type, this.template)
