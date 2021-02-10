@@ -1,9 +1,11 @@
 let instance = null
 
-import { CWFLibrary } from './modules/library'
-import { CWFSchemaBreadCrumbs } from './schemas/breadcrumbs'
-import { CWFSchemaFAQ } from './schemas/faq'
+import { ComradeWebflowLibrary } from './modules/library'
+import { ComradeWebflowRootSchema } from './schemas/root'
+import { SchemaFAQ } from './schemas/faq'
+import { SchemaBreadCrumbs } from './schemas/breadcrumbs'
 import { jqueryWatcher } from './utils/jquery-ready-watcher'
+import { ComradeWebflowDispatcher } from './modules/dispatcher'
 
 export class ComradeWebflow {
   constructor() {
@@ -16,7 +18,16 @@ export class ComradeWebflow {
       style: {}
     }
 
+    this.createDispatcher()
+
     console.log(`Comrade Webflow ${APP_VERSION}`)
+  }
+
+  createDispatcher() {
+    const dispatcher = new ComradeWebflowDispatcher()
+    this.on = dispatcher.addListener.bind(dispatcher)
+    this.off = dispatcher.removeListener.bind(dispatcher)
+    this.emit = dispatcher.dispatch.bind(dispatcher)
   }
 
   register({ type, url, alias, trigger }) {
@@ -36,7 +47,7 @@ export class ComradeWebflow {
     if (this.libraries[type].hasOwnProperty(alias)) {
       console.warn(`CWF: alias ${alias} with type ${type} already used`)
     } else {
-      this.libraries[type][alias] = new CWFLibrary({
+      this.libraries[type][alias] = new ComradeWebflowLibrary({
         type,
         url,
         alias,
@@ -61,26 +72,24 @@ export class ComradeWebflow {
   $ready(callback) {
     jqueryWatcher().then(callback)
   }
-
-  schema({
+  rootSchema(content, payload) {
+    this.schemas.root = new ComradeWebflowRootSchema(content, payload)
+  }
+  specialSchema({
     type,
-    selector,
-    faq = {
-      questionSelector: '',
-      answerSelector: ''
-    }
+    rootSelector = '',
+    questionSelector = '',
+    answerSelector = ''
   }) {
     if (type === 'breadcrumbs') {
-      this.schemas.breadcrumbs = new CWFSchemaBreadCrumbs(selector)
-      console.log(this.schemas.breadcrumbs)
+      this.schemas.breadcrumbs = new SchemaBreadCrumbs(rootSelector)
     }
     if (type === 'faq') {
-      this.schemas.faq = new CWFSchemaFAQ(
-        selector,
-        faq.questionSelector,
-        faq.answerSelector
+      this.schemas.faq = new SchemaFAQ(
+        rootSelector,
+        questionSelector,
+        answerSelector
       )
-      console.log(this.schemas.faq)
     }
   }
 }

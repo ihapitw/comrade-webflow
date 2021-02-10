@@ -1,6 +1,6 @@
-import { CWFSchema } from '../modules/schema'
+import { ComradeWebflowSchema } from '../modules/schema'
 
-export class CWFSchemaFAQ extends CWFSchema {
+export class SchemaFAQ extends ComradeWebflowSchema {
   constructor(itemSelector, questionSelector, answerSelector) {
     super(itemSelector)
 
@@ -14,12 +14,16 @@ export class CWFSchemaFAQ extends CWFSchema {
   }
 
   renderAtom(element) {
+    let question = element.querySelector(this.questionSelector)
+    let answer = element.querySelector(this.answerSelector)
+    question = question ? question.textContent : ''
+    answer = answer ? answer.textContent : ''
     return {
       '@type': 'Question',
-      name: element.querySelector(this.questionSelector).textContent,
+      name: question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: element.querySelector(this.answerSelector).textContent
+        text: answer
       }
     }
   }

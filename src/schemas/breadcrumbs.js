@@ -1,6 +1,6 @@
-import { CWFSchema } from '../modules/schema'
+import { ComradeWebflowSchema } from '../modules/schema'
 
-export class CWFSchemaBreadCrumbs extends CWFSchema {
+export class SchemaBreadCrumbs extends ComradeWebflowSchema {
   constructor(itemSelector) {
     super(itemSelector)
 

@@ -65,7 +65,120 @@ CWF.$ready(function () {
 
 > code will be executed only after jquery is loaded, can be used inside the symbol in the `embed code`
 
+# Dispatcher
+
+```js
+function changeMenuStateCallback(state) {
+  document.getElementById('menu').dataset.state = state
+}
+
+// add event listener
+CWF.on('change-menu-state', changeMenuStateCallback)
+
+// fire event with data
+CWF.emit('change-menu-state', 'open')
+CWF.emit('change-menu-state', 'closed')
+
+// remove event listener
+CWF.off('change-menu-state', changeMenuStateCallback)
+```
+
 # Schema
+
+## General
+
+#### HTML
+
+```js
+CWF.rootSchema(
+  {
+    '@type': 'Restaurant',
+    '@id': 'http://davessteakhouse.example.com',
+    name: "Dave's Steak House",
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '148 W 51st St',
+      addressLocality: 'New York',
+      addressRegion: 'NY',
+      postalCode: '10019',
+      addressCountry: 'US'
+    }
+  },
+  {
+    reviews: {
+      itemSelector: '.review-item',
+      authorSelector: '.review-author',
+      bodySelector: '.review-body',
+      ratingSelector: '.review-rating'
+    },
+    aggregateRating: {
+      ratingValue: '4.8',
+      reviewCount: '250'
+    }
+  }
+)
+```
+
+```html
+<section>
+  <div class="review-item">
+    <div class="review-author">Michael Smith</div>
+    <div class="review-body">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </div>
+    <div class="review-rating">5</div>
+  </div>
+  <div class="review-item">
+    <div class="review-author">Joe Smith</div>
+    <div class="review-body">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </div>
+    <div class="review-rating">4.5</div>
+  </div>
+</section>
+```
+
+> if reviews are not found on the page, then they will not go to schema
+
+#### Result in `<head>`
+
+```html
+<script type="application/ld+json" id="root-Schema">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "@id": "http://davessteakhouse.example.com",
+    "name": "Dave's Steak House",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "148 W 51st St",
+      "addressLocality": "New York",
+      "addressRegion": "NY",
+      "postalCode": "10019",
+      "addressCountry": "US"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Michael Smith" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "reviewBody": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Joe Smith" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "4.5" },
+        "reviewBody": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "250"
+    }
+  }
+</script>
+```
 
 ## Breadcrumbs
 
@@ -82,7 +195,7 @@ CWF.$ready(function () {
 #### JS
 
 ```js
-CWF.schema({ type: 'breadcrumbs', selector: '.breadcrumb-item' })
+CWF.specialSchema({ type: 'breadcrumbs', rootSelector: '.breadcrumb-item' })
 ```
 
 #### Result in `<head>`
@@ -135,13 +248,11 @@ CWF.schema({ type: 'breadcrumbs', selector: '.breadcrumb-item' })
 #### JS
 
 ```js
-CWF.schema({
+CWF.specialSchema({
   type: 'faq',
-  selector: '.faq-item',
-  faq: {
-    questionSelector: '.faq-question',
-    answerSelector: '.faq-answer'
-  }
+  rootSelector: '.faq-item',
+  questionSelector: '.faq-question',
+  answerSelector: '.faq-answer'
 })
 ```
 

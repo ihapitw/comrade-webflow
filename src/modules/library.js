@@ -1,5 +1,5 @@
 import { createScript, createStyle } from '../utils/create-content'
-export class CWFLibrary {
+export class ComradeWebflowLibrary {
   constructor({ type, url, alias, trigger }) {
     this.alias = alias
     this.type = type

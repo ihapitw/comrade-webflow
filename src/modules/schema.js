@@ -1,6 +1,6 @@
 import { createSchema } from '../utils/create-content'
 
-export class CWFSchema {
+export class ComradeWebflowSchema {
   constructor(itemSelector) {
     this.selector = itemSelector
     this.items = document.querySelectorAll(this.selector)

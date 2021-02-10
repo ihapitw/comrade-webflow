@@ -19,15 +19,14 @@ export function createScript(url) {
 }
 
 export function createSchema(type, content) {
-  let element = document.getElementById(`cwf-schema-${type}`)
+  let element = document.getElementById(`${type}-Schema`)
   if (element) {
     element.innerHTML = JSON.stringify(content)
     return false
   }
-
   element = document.createElement('script')
   element.type = 'application/ld+json'
   element.innerHTML = JSON.stringify(content)
-  element.id = type
+  element.id = `${type}-Schema`
   document.head.appendChild(element)
 }
