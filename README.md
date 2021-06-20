@@ -110,10 +110,6 @@ CWF.rootSchema(
       authorSelector: '.review-author',
       bodySelector: '.review-body',
       ratingSelector: '.review-rating'
-    },
-    aggregateRating: {
-      ratingValue: '4.8',
-      reviewCount: '250'
     }
   }
 )
@@ -173,8 +169,8 @@ CWF.rootSchema(
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "250"
+      "ratingValue": 4.75,
+      "reviewCount": 2
     }
   }
 </script>
