@@ -52,9 +52,9 @@ CWF.rootSchema(
 CWF.specialSchema({ type: 'breadcrumbs', rootSelector: '.breadcrumb-item' })
 CWF.specialSchema({
   type: 'faq',
-  rootSelector: '.faq-item',
-  questionSelector: '.faq-question',
-  answerSelector: '.faq-answer'
+  rootSelector: '.our-rel-proc__faq-item',
+  questionSelector: '.item-name__h3',
+  answerSelector: '.faq-item-body'
 })
 
 function changeMenuStateCallback(state) {

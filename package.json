@@ -1,6 +1,6 @@
 {
   "name": "comrade-webflow",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "description": "Webflow support library",
   "main": "dist/comrade-webflow.js",
   "module": "index.js",

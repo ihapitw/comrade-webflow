@@ -1,14 +1,14 @@
 import { createSchema } from '../utils/create-content'
 export class ComradeWebflowRootSchema {
   constructor(content, payload) {
-    this.content = { '@context': 'https://schema.org', ...content }
+    this.template = { '@context': 'https://schema.org', ...content }
     this.payload = payload
     if (this.payload && this.payload.reviews) {
       this.eachReviews()
-      if (this.payload.aggregateRating) {
-        this.content.aggregateRating = {
+      if (this.reviews.length > 0) {
+        this.template.aggregateRating = {
           '@type': 'AggregateRating',
-          ...this.payload.aggregateRating
+          ...this.aggregateRating()
         }
       }
     }
@@ -42,11 +42,25 @@ export class ComradeWebflowRootSchema {
         })
       )
     })
-    this.content = { ...this.content, review: this.reviews }
+    if (this.reviews.length > 0) {
+      this.template = { ...this.template, review: this.reviews }
+    }
     this.print()
   }
 
+  aggregateRating() {
+    let reviewCount = this.reviews.length
+    let ratingValue =
+      this.reviews.reduce((sum, review) => {
+        return sum + parseFloat(review.reviewRating.ratingValue)
+      }, 0) / reviewCount
+    return {
+      reviewCount,
+      ratingValue
+    }
+  }
+
   print() {
-    createSchema('root', this.content)
+    createSchema('root', this.template)
   }
 }
